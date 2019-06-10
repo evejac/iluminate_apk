@@ -47,3 +47,44 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+
+
+
+       initialize: function() {  
+        this.bindEvents();  
+    },  
+     
+    bindEvents: function() {  
+        var takePhoto = document.getElementById('takePhoto'); 
+        //instanciamos función tomarFoto al hacer click en el botón takePhoto 
+        takePhoto.addEventListener('click', app.takePhoto, false);  
+        //Lo mismo para enviar la foto capturada a un servicio web
+        var sendPhoto = document.getElementById('sendPhoto');  
+        sendPhoto.addEventListener('click', app.sendPhoto, false); 
+       
+    }
+
+//función que se ejecuta al pulsar el botón de tomar foto:
+     takePhoto: function(){  
+        //podemos precisar la calidad de la foto para no tomar fotos muy pesadas, si lo que        //queremos es enviarla a un servicio web o red social.
+//Así mismo definiremos una función en caso de tomar la imagen satisfactoriamente o no
+        navigator.camera.getPicture(app.onPhotoDataSuccess, app.onFail, { quality: 20,   
+            allowEdit: true, destinationType: navigator.camera.DestinationType.DATA_URL });  
+     },  
+  
+//Está función se ejecuta al tomar satisfactoriamente la foto.
+    onPhotoDataSuccess: function(imageData) {
+       //Instancia un objeto del html para poder mostar en el la foto recién capturada.       
+      var photo = document.getElementById('uploadedFile');    
+      photo.style.display = 'block';    
+//Añade a la propiedad src la imagen para poder mostrarla en la interface.
+      photo.src = "data:image/jpeg;base64," + imageData;    
+      
+      
+    },
+//Esta función se ejecuta en caso de que la cámara falle o se haya cancelado por el usuario. 
+   onFail: function(message) {  
+      alert('Fallo al poner en funcionamiento la camara: ' + message);  
+
+    }  

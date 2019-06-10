@@ -1,0 +1,12 @@
+div#encabezado{
+	background-color: rgb(189, 255, 66);
+	width: 100%;
+	height: 50px;
+	font-size: 25px;
+}
+div#cuerpo{
+	
+	width: 100%;
+	height: auto;
+	min-height: 400px;
+}
